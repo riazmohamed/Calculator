@@ -1,0 +1,64 @@
+/* Custom styles for iPhone Calculator */
+
+/* Button press animation */
+.calc-button:active {
+    transform: scale(0.95);
+}
+
+/* Smooth transitions for display changes */
+#display, #equation {
+    transition: all 0.2s ease;
+}
+
+/* History panel scrollbar styling */
+#history-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+#history-list::-webkit-scrollbar-track {
+    background: #374151;
+    border-radius: 3px;
+}
+
+#history-list::-webkit-scrollbar-thumb {
+    background: #6B7280;
+    border-radius: 3px;
+}
+
+#history-list::-webkit-scrollbar-thumb:hover {
+    background: #9CA3AF;
+}
+
+/* History item styling */
+.history-item {
+    @apply bg-gray-700 rounded-lg p-3 mb-2 cursor-pointer hover:bg-gray-600 transition-colors;
+}
+
+.history-equation {
+    @apply text-gray-300 text-sm;
+}
+
+.history-result {
+    @apply text-white text-xl font-medium;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+    .calc-button {
+        @apply h-14 text-xl;
+    }
+    
+    #display {
+        @apply text-4xl;
+    }
+}
+
+/* Zero button special styling */
+button[data-number="0"] {
+    @apply justify-start pl-6;
+}
+
+/* Clear button text change animation */
+.calc-button[data-action="clear"] {
+    transition: all 0.2s ease;
+}
