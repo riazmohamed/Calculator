@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iPhone Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-900 min-h-screen flex items-center justify-center p-4">
+    <div class="w-full max-w-md">
+        <!-- Calculator Container -->
+        <div class="bg-black rounded-3xl p-6 shadow-2xl">
+            <!-- Display -->
+            <div class="mb-4">
+                <div id="equation" class="text-gray-400 text-right text-xl mb-2 h-6"></div>
+                <div id="display" class="text-white text-right text-5xl font-light overflow-hidden">0</div>
+            </div>
+            
+            <!-- Buttons -->
+            <div class="grid grid-cols-4 gap-3">
+                <!-- Row 1 -->
+                <button class="calc-button bg-gray-300 text-black text-2xl font-medium rounded-full h-16 hover:bg-gray-400 transition-colors" data-action="clear">AC</button>
+                <button class="calc-button bg-gray-300 text-black text-2xl font-medium rounded-full h-16 hover:bg-gray-400 transition-colors" data-action="toggle-sign">+/-</button>
+                <button class="calc-button bg-gray-300 text-black text-2xl font-medium rounded-full h-16 hover:bg-gray-400 transition-colors" data-action="percent">%</button>
+                <button class="calc-button bg-orange-500 text-white text-3xl font-medium rounded-full h-16 hover:bg-orange-600 transition-colors" data-action="divide">÷</button>
+                
+                <!-- Row 2 -->
+                <button class="calc-button bg-gray-700 text-white text-2xl font-medium rounded-full h-16 hover:bg-gray-600 transition-colors" data-number="7">7</button>
+                <button class="calc-button bg-gray-700 text-white text-2xl font-medium rounded-full h-16 hover:bg-gray-600 transition-colors" data-number="8">8</button>
+                <button class="calc-button bg-gray-700 text-white text-2xl font-medium rounded-full h-16 hover:bg-gray-600 transition-colors" data-number="9">9</button>
+                <button class="calc-button bg-orange-500 text-white text-3xl font-medium rounded-full h-16 hover:bg-orange-600 transition-colors" data-action="multiply">×</button>
+                
+                <!-- Row 3 -->
+                <button class="calc-button bg-gray-700 text-white text-2xl font-medium rounded-full h-16 hover:bg-gray-600 transition-colors" data-number="4">4</button>
+                <button class="calc-button bg-gray-700 text-white text-2xl font-medium rounded-full h-16 hover:bg-gray-600 transition-colors" data-number="5">5</button>
+                <button class="calc-button bg-gray-700 text-white text-2xl font-medium rounded-full h-16 hover:bg-gray-600 transition-colors" data-number="6">6</button>
+                <button class="calc-button bg-orange-500 text-white text-3xl font-medium rounded-full h-16 hover:bg-orange-600 transition-colors" data-action="subtract">-</button>
+                
+                <!-- Row 4 -->
+                <button class="calc-button bg-gray-700 text-white text-2xl font-medium rounded-full h-16 hover:bg-gray-600 transition-colors" data-number="1">1</button>
+                <button class="calc-button bg-gray-700 text-white text-2xl font-medium rounded-full h-16 hover:bg-gray-600 transition-colors" data-number="2">2</button>
+                <button class="calc-button bg-gray-700 text-white text-2xl font-medium rounded-full h-16 hover:bg-gray-600 transition-colors" data-number="3">3</button>
+                <button class="calc-button bg-orange-500 text-white text-3xl font-medium rounded-full h-16 hover:bg-orange-600 transition-colors" data-action="add">+</button>
+                
+                <!-- Row 5 -->
+                <button class="calc-button bg-gray-700 text-white text-2xl font-medium rounded-full h-16 hover:bg-gray-600 transition-colors col-span-2" data-number="0">0</button>
+                <button class="calc-button bg-gray-700 text-white text-2xl font-medium rounded-full h-16 hover:bg-gray-600 transition-colors" data-action="decimal">.</button>
+                <button class="calc-button bg-orange-500 text-white text-3xl font-medium rounded-full h-16 hover:bg-orange-600 transition-colors" data-action="equals">=</button>
+            </div>
+        </div>
+        
+        <!-- History Toggle Button -->
+        <div class="mt-4 text-center">
+            <button id="history-toggle" class="bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-colors">
+                Show History
+            </button>
+        </div>
+    </div>
+    
+    <!-- History Panel -->
+    <div id="history-panel" class="fixed top-0 right-0 h-full w-80 bg-gray-800 shadow-2xl transform translate-x-full transition-transform duration-300 z-50">
+        <div class="p-4 h-full flex flex-col">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-white text-xl font-semibold">History</h2>
+                <button id="close-history" class="text-gray-400 hover:text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            
+            <button id="clear-history" class="bg-red-600 text-white px-3 py-1 rounded mb-4 hover:bg-red-700 transition-colors text-sm">
+                Clear History
+            </button>
+            
+            <div id="history-list" class="flex-1 overflow-y-auto">
+                <!-- History items will be added here -->
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
