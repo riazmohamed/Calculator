@@ -1,85 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Character encoding for proper text display -->
     <meta charset="UTF-8">
+
+    <!-- Responsive viewport settings for mobile devices -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Page title shown in browser tab -->
     <title>iPhone Calculator</title>
+
+    <!-- Tailwind CSS CDN - GitHub Pages compatible styling framework -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom CSS for additional styling -->
     <link rel="stylesheet" href="styles.css">
 </head>
+
+<!-- Main body with dark background and centered layout -->
 <body class="bg-gray-900 min-h-screen flex items-center justify-center p-4">
+    <!-- Main container with responsive width -->
     <div class="w-full max-w-md">
-        <!-- Calculator Container -->
+
+        <!-- ========================================
+             CALCULATOR CONTAINER
+             iPhone-style calculator with black background
+             ======================================== -->
         <div class="bg-black rounded-3xl p-6 shadow-2xl">
-            <!-- Display -->
+
+            <!-- ========================================
+                 DISPLAY SECTION
+                 Shows equation and current value
+                 ======================================== -->
             <div class="mb-4">
+                <!-- Equation display - shows previous value and operation -->
                 <div id="equation" class="text-gray-400 text-right text-xl mb-2 h-6"></div>
+
+                <!-- Main display - shows current number -->
                 <div id="display" class="text-white text-right text-5xl font-light overflow-hidden">0</div>
             </div>
-            
-            <!-- Buttons -->
+
+            <!-- ========================================
+                 BUTTON GRID
+                 4-column grid layout for calculator buttons
+                 ======================================== -->
             <div class="grid grid-cols-4 gap-3">
-                <!-- Row 1 -->
+
+                <!-- Row 1: Clear, +/-, %, ÷ -->
                 <button class="calc-button bg-gray-300 text-black text-2xl font-medium rounded-full h-16 hover:bg-gray-400 transition-colors" data-action="clear">AC</button>
                 <button class="calc-button bg-gray-300 text-black text-2xl font-medium rounded-full h-16 hover:bg-gray-400 transition-colors" data-action="toggle-sign">+/-</button>
                 <button class="calc-button bg-gray-300 text-black text-2xl font-medium rounded-full h-16 hover:bg-gray-400 transition-colors" data-action="percent">%</button>
                 <button class="calc-button bg-orange-500 text-white text-3xl font-medium rounded-full h-16 hover:bg-orange-600 transition-colors" data-action="divide">÷</button>
-                
-                <!-- Row 2 -->
+
+                <!-- Row 2: 7, 8, 9, × -->
                 <button class="calc-button bg-gray-700 text-white text-2xl font-medium rounded-full h-16 hover:bg-gray-600 transition-colors" data-number="7">7</button>
                 <button class="calc-button bg-gray-700 text-white text-2xl font-medium rounded-full h-16 hover:bg-gray-600 transition-colors" data-number="8">8</button>
                 <button class="calc-button bg-gray-700 text-white text-2xl font-medium rounded-full h-16 hover:bg-gray-600 transition-colors" data-number="9">9</button>
                 <button class="calc-button bg-orange-500 text-white text-3xl font-medium rounded-full h-16 hover:bg-orange-600 transition-colors" data-action="multiply">×</button>
-                
-                <!-- Row 3 -->
+
+                <!-- Row 3: 4, 5, 6, - -->
                 <button class="calc-button bg-gray-700 text-white text-2xl font-medium rounded-full h-16 hover:bg-gray-600 transition-colors" data-number="4">4</button>
                 <button class="calc-button bg-gray-700 text-white text-2xl font-medium rounded-full h-16 hover:bg-gray-600 transition-colors" data-number="5">5</button>
                 <button class="calc-button bg-gray-700 text-white text-2xl font-medium rounded-full h-16 hover:bg-gray-600 transition-colors" data-number="6">6</button>
                 <button class="calc-button bg-orange-500 text-white text-3xl font-medium rounded-full h-16 hover:bg-orange-600 transition-colors" data-action="subtract">-</button>
-                
-                <!-- Row 4 -->
+
+                <!-- Row 4: 1, 2, 3, + -->
                 <button class="calc-button bg-gray-700 text-white text-2xl font-medium rounded-full h-16 hover:bg-gray-600 transition-colors" data-number="1">1</button>
                 <button class="calc-button bg-gray-700 text-white text-2xl font-medium rounded-full h-16 hover:bg-gray-600 transition-colors" data-number="2">2</button>
                 <button class="calc-button bg-gray-700 text-white text-2xl font-medium rounded-full h-16 hover:bg-gray-600 transition-colors" data-number="3">3</button>
                 <button class="calc-button bg-orange-500 text-white text-3xl font-medium rounded-full h-16 hover:bg-orange-600 transition-colors" data-action="add">+</button>
-                
-                <!-- Row 5 -->
+
+                <!-- Row 5: 0 (wide), ., = -->
+                <!-- 0 button spans 2 columns for iPhone-style layout -->
                 <button class="calc-button bg-gray-700 text-white text-2xl font-medium rounded-full h-16 hover:bg-gray-600 transition-colors col-span-2" data-number="0">0</button>
                 <button class="calc-button bg-gray-700 text-white text-2xl font-medium rounded-full h-16 hover:bg-gray-600 transition-colors" data-action="decimal">.</button>
                 <button class="calc-button bg-orange-500 text-white text-3xl font-medium rounded-full h-16 hover:bg-orange-600 transition-colors" data-action="equals">=</button>
             </div>
         </div>
-        
-        <!-- History Toggle Button -->
+
+        <!-- ========================================
+             HISTORY TOGGLE BUTTON
+             Opens/closes the calculation history panel
+             ======================================== -->
         <div class="mt-4 text-center">
             <button id="history-toggle" class="bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-colors">
                 Show History
             </button>
         </div>
     </div>
-    
-    <!-- History Panel -->
+
+    <!-- ========================================
+         HISTORY PANEL (SIDEBAR)
+         Slides in from right to show calculation history
+         Uses localStorage for persistence
+         ======================================== -->
     <div id="history-panel" class="fixed top-0 right-0 h-full w-80 bg-gray-800 shadow-2xl transform translate-x-full transition-transform duration-300 z-50">
         <div class="p-4 h-full flex flex-col">
+
+            <!-- History header with close button -->
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-white text-xl font-semibold">History</h2>
+
+                <!-- Close button with X icon -->
                 <button id="close-history" class="text-gray-400 hover:text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
             </div>
-            
+
+            <!-- Clear history button -->
             <button id="clear-history" class="bg-red-600 text-white px-3 py-1 rounded mb-4 hover:bg-red-700 transition-colors text-sm">
                 Clear History
             </button>
-            
+
+            <!-- History list container - populated by JavaScript -->
             <div id="history-list" class="flex-1 overflow-y-auto">
-                <!-- History items will be added here -->
+                <!-- History items will be dynamically added here by script.js -->
             </div>
         </div>
     </div>
-    
+
+    <!-- JavaScript file - procedural implementation for GitHub Pages compatibility -->
     <script src="script.js"></script>
 </body>
 </html>

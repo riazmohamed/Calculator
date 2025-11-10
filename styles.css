@@ -1,64 +1,101 @@
-/* Custom styles for iPhone Calculator */
+/* ============================================
+   CALCULATOR CUSTOM STYLES
+   iPhone-style calculator with enhanced UX
+   GitHub Pages compatible CSS
+   ============================================ */
 
-/* Button press animation */
+/* ============================================
+   BUTTON INTERACTIONS
+   ============================================ */
+
+/* Button press animation - provides tactile feedback */
 .calc-button:active {
     transform: scale(0.95);
 }
 
-/* Smooth transitions for display changes */
+/* ============================================
+   DISPLAY ANIMATIONS
+   ============================================ */
+
+/* Smooth transitions for display value changes */
 #display, #equation {
     transition: all 0.2s ease;
 }
 
-/* History panel scrollbar styling */
+/* ============================================
+   HISTORY PANEL SCROLLBAR STYLING
+   Custom scrollbar for WebKit browsers (Chrome, Safari, Edge)
+   ============================================ */
+
+/* Scrollbar width */
 #history-list::-webkit-scrollbar {
     width: 6px;
 }
 
+/* Scrollbar track (background) */
 #history-list::-webkit-scrollbar-track {
-    background: #374151;
+    background: #374151;  /* Gray-700 */
     border-radius: 3px;
 }
 
+/* Scrollbar thumb (draggable part) */
 #history-list::-webkit-scrollbar-thumb {
-    background: #6B7280;
+    background: #6B7280;  /* Gray-500 */
     border-radius: 3px;
 }
 
+/* Scrollbar thumb on hover */
 #history-list::-webkit-scrollbar-thumb:hover {
-    background: #9CA3AF;
+    background: #9CA3AF;  /* Gray-400 */
 }
 
-/* History item styling */
+/* ============================================
+   HISTORY ITEM STYLING
+   Using Tailwind @apply for consistency
+   ============================================ */
+
+/* Container for each history entry */
 .history-item {
     @apply bg-gray-700 rounded-lg p-3 mb-2 cursor-pointer hover:bg-gray-600 transition-colors;
 }
 
+/* Equation text in history (e.g., "5 + 3") */
 .history-equation {
     @apply text-gray-300 text-sm;
 }
 
+/* Result text in history */
 .history-result {
     @apply text-white text-xl font-medium;
 }
 
-/* Responsive adjustments */
+/* ============================================
+   RESPONSIVE DESIGN
+   Mobile-friendly adjustments for smaller screens
+   ============================================ */
+
 @media (max-width: 640px) {
+    /* Smaller button height for mobile devices */
     .calc-button {
         @apply h-14 text-xl;
     }
-    
+
+    /* Smaller display text for mobile */
     #display {
         @apply text-4xl;
     }
 }
 
-/* Zero button special styling */
+/* ============================================
+   SPECIAL BUTTON STYLING
+   ============================================ */
+
+/* Zero button - wider layout with left alignment (iPhone style) */
 button[data-number="0"] {
     @apply justify-start pl-6;
 }
 
-/* Clear button text change animation */
+/* Clear button - smooth transition for potential text changes */
 .calc-button[data-action="clear"] {
     transition: all 0.2s ease;
 }
